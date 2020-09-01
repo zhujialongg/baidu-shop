@@ -82,7 +82,7 @@
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${mr.spring.cloud.version}</version>
                 <type>pom</type>
-                <!--解决maven单继承的问题-->
+                <!--解决maven单继承的问题  ??-->
                 <scope>import</scope>
             </dependency>
 
