@@ -3,8 +3,10 @@ package com.baidu.shop.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baidu.shop.base.BaseApiService;
 import com.baidu.shop.base.Result;
+import com.baidu.shop.entity.CategoryBrandEntity;
 import com.baidu.shop.entity.CategoryEntity;
 import com.baidu.shop.entity.SpecGroupEntity;
+import com.baidu.shop.mapper.CategoryBrandMapper;
 import com.baidu.shop.mapper.CategoryMapper;
 import com.baidu.shop.mapper.SpecGroupMapper;
 import com.baidu.shop.service.CategoryService;
@@ -31,6 +33,9 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
 
     @Resource
     private SpecGroupMapper specGroupMapper;
+
+    @Resource
+    private CategoryBrandMapper categoryBrandMapper;
 
     @Override
     public Result<List<CategoryEntity>> getCategoryByPid(Integer pid) {
@@ -76,6 +81,25 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
     @Transactional
     @Override
     public Result<JSONObject> removeCategory(Integer id) {
+
+        //判断分类id是否存在关联品牌
+        Example example2 = new Example(CategoryBrandEntity.class);
+        example2.createCriteria().andEqualTo("categoryId",id);
+        List<CategoryBrandEntity> list2 = categoryBrandMapper.selectByExample(example2);
+        if(list2.size()>0){
+            return this.setResultError("该分类存在绑定品牌,不能被删除");
+        }
+
+
+        //判断分类id是否存在关联规格组
+        Example example1 = new Example(SpecGroupEntity.class);
+        example1.createCriteria().andEqualTo("cid",id);
+        List<SpecGroupEntity> list1 = specGroupMapper.selectByExample(example1);
+
+        if (list1.size()>0) {
+            return this.setResultError("该分类存在绑定规格组,不能被删除");
+        }
+
         //通过工具类  判断  id是否为空
         if(ObjectUtil.isNull(id)){
                 return this.setResultError("该id不存在");
@@ -99,14 +123,7 @@ public class CategoryServiceImpl extends BaseApiService implements CategoryServi
         categoryMapper.updateByPrimaryKeySelective(entity);
         }
 
-        //判断分类id是否存在关联数据
-        Example example1 = new Example(SpecGroupEntity.class);
-        example1.createCriteria().andEqualTo("cid",id);
-        List<SpecGroupEntity> list1 = specGroupMapper.selectByExample(example1);
 
-        if (list1.size()>=1) {
-            return this.setResultError("该分类存在绑定规格组,不能被删除");
-        }
 
 
         //删除操作

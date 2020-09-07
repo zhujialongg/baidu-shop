@@ -5,6 +5,7 @@ import com.baidu.shop.status.HTTPStatus;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.domain.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +30,7 @@ import java.io.InputStream;
 @RestController
 @RequestMapping(value = "upload")
 @Slf4j
+@Api(tags = "fastDFS-上传图片")
 public class FastDFSUploadController {
 
 

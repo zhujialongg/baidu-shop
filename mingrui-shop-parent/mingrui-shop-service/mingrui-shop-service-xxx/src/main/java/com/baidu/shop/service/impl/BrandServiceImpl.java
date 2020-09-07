@@ -10,6 +10,7 @@ import com.baidu.shop.mapper.BrandMapper;
 import com.baidu.shop.mapper.CategoryBrandMapper;
 import com.baidu.shop.service.BrandService;
 import com.baidu.shop.utils.BaiduBeanUtil;
+import com.baidu.shop.utils.ObjectUtil;
 import com.baidu.shop.utils.PinyinUtil;
 import com.baidu.shop.utils.StringUtil;
 import com.github.pagehelper.PageHelper;
@@ -45,16 +46,24 @@ public class BrandServiceImpl extends BaseApiService implements BrandService{
     public Result<PageInfo<BrandEntity>> getBrandInfo(BrandDTO brandDTO) {
 
         //分页
-        PageHelper.startPage(brandDTO.getPage(),brandDTO.getRows());
+        if(ObjectUtil.isNotNull(brandDTO.getPage())
+                && ObjectUtil.isNotNull(brandDTO.getRows()))
+            PageHelper.startPage(brandDTO.getPage(),brandDTO.getRows());
 
         //条件查询  排序
         Example example = new Example(BrandEntity.class);
-        if(StringUtil.isNotEmpty(brandDTO.getOrder())){
-            example.setOrderByClause(brandDTO.getOrderByClause());
+
+        if(StringUtil.isNotEmpty(brandDTO.getSort()))  example.setOrderByClause(brandDTO.getOrderByClause());
+
+        //为 spu中根据id查询 品牌添加 根据id条件查询
+        Example.Criteria criteria = example.createCriteria();
+        if(ObjectUtil.isNotNull(brandDTO.getId())){
+            criteria.andEqualTo("id",brandDTO.getId());
         }
+
         //若涉及到多个查询 的话  需要单拎出来 example.createCriteria()  只会执行最后一个查询
         if(StringUtil.isNotEmpty(brandDTO.getName())){
-            example.createCriteria().andLike("name","%"+brandDTO.getName()+"%");
+            criteria.andLike("name","%"+brandDTO.getName()+"%");
         }
 
         //查询

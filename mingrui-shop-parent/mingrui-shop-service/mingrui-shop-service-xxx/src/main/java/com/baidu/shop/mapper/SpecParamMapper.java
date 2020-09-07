@@ -17,8 +17,4 @@ import java.util.List;
  **/
 public interface SpecParamMapper extends Mapper<SpecParamEntity> {
 
-//    @Select(value = "select * from tb_spec_param p where p.group_id = #{id}")
-//    List<SpecParamEntity> selectByGroupId(Integer id);
-
-
 }

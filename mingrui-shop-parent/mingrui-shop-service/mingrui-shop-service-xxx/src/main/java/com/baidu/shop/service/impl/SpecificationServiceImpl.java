@@ -7,9 +7,12 @@ import com.baidu.shop.dto.SpecGroupDTO;
 import com.baidu.shop.dto.SpecParamDTO;
 import com.baidu.shop.entity.SpecGroupEntity;
 import com.baidu.shop.entity.SpecParamEntity;
+import com.baidu.shop.exception.MingruiException;
+import com.baidu.shop.exception.errorenum.ErrorCodeEnum;
 import com.baidu.shop.mapper.SpecGroupMapper;
 import com.baidu.shop.mapper.SpecParamMapper;
 import com.baidu.shop.service.SpecificationService;
+import com.baidu.shop.status.HTTPStatus;
 import com.baidu.shop.utils.BaiduBeanUtil;
 import com.baidu.shop.utils.ObjectUtil;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,18 +75,15 @@ public class SpecificationServiceImpl extends BaseApiService implements Specific
     public Result<JSONObject> removeSpecGroup(Integer id) {
 
         //思路：1.判断当前id是否为空
-        if(ObjectUtil.isNull(id)){
-            return this.setResultError("id为空！！！");
-        }
+        if(ObjectUtil.isNull(id)) throw new MingruiException(ErrorCodeEnum.ID_NOT_NULL);
         //2.通过 id查询 中间表中是否存在关联数据（也就是规格组下是否存在规格参数）
-         //List<SpecParamEntity> paramList = specParamMapper.selectByGroupId(id);
 
         Example example = new Example(SpecParamEntity.class);
         example.createCriteria().andEqualTo("groupId",id);
         List<SpecParamEntity> paramList = specParamMapper.selectByExample(example);
-
-        if(paramList.size() > 0 ){//存在: 返回错误信息
-            return this.setResultError("该规格组下存在关联规格参数,不能被删除");
+        //存在: 返回错误信息
+        if(paramList.size() > 0 ){
+             return this.setResultError("该规格组下存在关联规格参数,不能被删除");
         }
         //不存在：进行删除操作
         specGroupMapper.deleteByPrimaryKey(id);

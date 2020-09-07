@@ -6,12 +6,11 @@ import com.baidu.shop.dto.BrandDTO;
 import com.baidu.shop.entity.BrandEntity;
 import com.baidu.shop.validate.group.MingruiOperation;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.JsonObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Date
  * @Version V1.0
  **/
-@Api(value = "品牌接口")
+@Api(tags = "品牌接口")
 public interface BrandService {
 
     @ApiOperation(value = "获取品牌信息")
@@ -33,8 +32,14 @@ public interface BrandService {
     public Result<JSONObject>   save(@Validated({MingruiOperation.Add.class}) @RequestBody BrandDTO brandDTO);
 
 
+    @PutMapping(value = "brand/addBrandInfo")
+    @ApiOperation(value = "修改品牌信息")
+    public Result<JsonObject> edit(@Validated({MingruiOperation.Update.class}) @RequestBody BrandDTO brandDTO);
 
 
+    @DeleteMapping(value = "brand/remove")
+    @ApiOperation(value = "删除品牌信息")
+    public  Result<JSONObject> remove(Integer id);
 
 
 }
