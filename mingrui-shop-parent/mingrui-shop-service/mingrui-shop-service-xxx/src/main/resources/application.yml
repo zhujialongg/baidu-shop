@@ -9,10 +9,11 @@ spring:
   datasource:
     # 数据源名称，任意
     name: mysql
+    #  腾讯云：jdbc:mysql://49.232.56.100:3306/baidu-shop?
     url: jdbc:mysql://49.232.56.100:3306/baidu-shop?useSSL=true&nullNamePatternMatchesAll=true&serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     # 数据库连接用户
     username: root
-    # 数据库连接密码
+    # 数据库连接密码  Root.110
     password: Root.110
     # 驱动名称
     driver-class-name: com.mysql.cj.jdbc.Driver

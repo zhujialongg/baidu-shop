@@ -59,7 +59,7 @@ public interface SpecificationService {
     @PutMapping(value = "specparam/saveSpecParam")
     Result<SpecParamEntity>  editSpecParam(@Validated({MingruiOperation.Update.class}) @RequestBody SpecParamDTO specParamDTO);
 
-    @ApiOperation(value = "修改规格参数")
+    @ApiOperation(value = "删除规格参数")
     @DeleteMapping(value = "sspecparam/removeSpecParam")
     Result<SpecParamEntity>  removeSpecParam(Integer  id);
 

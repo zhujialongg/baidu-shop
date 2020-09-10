@@ -20,10 +20,10 @@ fdfs:
 mingrui:
   upload:
     path:
-      windows: D:\\upload
-      linux: /zhujialong/upload
+      windows: D:\\images
+      linux: /zhujialong/images
     img:
-      #图片服务器主机
+      #图片服务器主机  http://49.232.56.100/
       host: http://49.232.56.100/
 logging:
   level:

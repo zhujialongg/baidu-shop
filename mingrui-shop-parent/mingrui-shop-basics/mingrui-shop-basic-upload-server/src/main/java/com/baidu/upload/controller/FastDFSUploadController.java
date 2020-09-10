@@ -53,13 +53,13 @@ public class FastDFSUploadController {
 
         String ex = filename.substring(filename.lastIndexOf(".") + 1);//文件后缀名
         // 上传并且生成缩略图
-        StorePath storePath = null;//上传
-        try {
-            storePath = this.storageClient.uploadImageAndCrtThumbImage(
+//         storePath = null;//上传
+//        try {
+        StorePath  storePath = this.storageClient.uploadImageAndCrtThumbImage(
                     inputStream, file.getSize(), ex, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         // 带分组的路径
         log.info("上传图片全路径:{}", storePath.getFullPath());
         // 不带分组的路径

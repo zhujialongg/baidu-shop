@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @ClassName
@@ -31,15 +33,20 @@ public interface BrandService {
     @PostMapping(value = "brand/addBrandInfo")
     public Result<JSONObject>   save(@Validated({MingruiOperation.Add.class}) @RequestBody BrandDTO brandDTO);
 
-
-    @PutMapping(value = "brand/addBrandInfo")
     @ApiOperation(value = "修改品牌信息")
+    @PutMapping(value = "brand/addBrandInfo")
     public Result<JsonObject> edit(@Validated({MingruiOperation.Update.class}) @RequestBody BrandDTO brandDTO);
 
-
-    @DeleteMapping(value = "brand/remove")
     @ApiOperation(value = "删除品牌信息")
+    @DeleteMapping(value = "brand/remove")
     public  Result<JSONObject> remove(Integer id);
+
+
+    @ApiOperation(value = "根据分类id查询品牌信息")
+    @GetMapping(value = "brand/getBrandByCategory")
+    Result<List<BrandEntity>> getBrandByCategory(Integer cid);
+
+
 
 
 }

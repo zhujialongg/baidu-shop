@@ -9,6 +9,7 @@ import lombok.Data;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName
@@ -49,10 +50,10 @@ public class SpuDTO extends BaseDTO {
     @NotNull(message = "商品所属品牌id不能为空",groups = {MingruiOperation.Add.class})
     private Integer brandId;
 
-    @ApiModelProperty(value = "书否上架,0:：下架 1:上架")
+    @ApiModelProperty(value = "书否上架,0:：下架 1:上架",example = "1")
     private Integer saleable;
 
-    @ApiModelProperty(value = "是否有效")
+    @ApiModelProperty(value = "是否有效",example = "1")
     private Integer valid;
 
     @ApiModelProperty(value = "添加时间")
@@ -65,6 +66,13 @@ public class SpuDTO extends BaseDTO {
     private String brandName;
 
     private String categoryName;
+
+
+    @ApiModelProperty(value = "大字段数据")
+    private SpuDetailDTO spuDetail;
+
+    @ApiModelProperty(value = "sku属性数据集合")
+    private List<SkuDTO> skus;
 
 
 }
