@@ -1,6 +1,6 @@
 package com.baidu.shop.mapper;
 
-import com.baidu.shop.entity.StockEntity;
+import com.baidu.entity.StockEntity;
 import tk.mybatis.mapper.additional.idlist.DeleteByIdListMapper;
 import tk.mybatis.mapper.common.Mapper;
 

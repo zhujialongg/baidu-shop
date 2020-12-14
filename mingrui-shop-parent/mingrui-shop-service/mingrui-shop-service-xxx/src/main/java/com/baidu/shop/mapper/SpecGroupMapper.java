@@ -1,6 +1,6 @@
 package com.baidu.shop.mapper;
 
-import com.baidu.shop.entity.SpecGroupEntity;
+import com.baidu.entity.SpecGroupEntity;
 import tk.mybatis.mapper.common.Mapper;
 
 /**

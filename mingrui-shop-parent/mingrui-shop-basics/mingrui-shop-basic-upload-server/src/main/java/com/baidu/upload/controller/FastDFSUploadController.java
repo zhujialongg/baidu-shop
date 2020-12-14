@@ -1,7 +1,7 @@
 package com.baidu.upload.controller;
 
-import com.baidu.shop.base.Result;
-import com.baidu.shop.status.HTTPStatus;
+import com.baidu.base.Result;
+import com.baidu.status.HTTPStatus;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.domain.ThumbImageConfig;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;

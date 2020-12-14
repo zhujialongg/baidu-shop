@@ -1,9 +1,8 @@
 package com.baidu.shop.mapper;
 
-import com.baidu.shop.entity.SpuEntity;
+import com.baidu.entity.SpuEntity;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
-import tk.mybatis.mapper.entity.Example;
 
 /**
  * @ClassName

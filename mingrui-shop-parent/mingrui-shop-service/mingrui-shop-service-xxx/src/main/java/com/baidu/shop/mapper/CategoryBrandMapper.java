@@ -1,6 +1,6 @@
 package com.baidu.shop.mapper;
 
-import com.baidu.shop.entity.CategoryBrandEntity;
+import com.baidu.entity.CategoryBrandEntity;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -13,6 +13,5 @@ import tk.mybatis.mapper.common.Mapper;
  **/
 //接口的多继承
 public interface CategoryBrandMapper extends InsertListMapper<CategoryBrandEntity>,Mapper<CategoryBrandEntity> {
-
 
 }

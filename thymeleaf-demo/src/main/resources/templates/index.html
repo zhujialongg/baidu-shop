@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试thyemLeaf</title>
+</head>
+<body>
+
+<!--你好,<span th:text="${stu.code.substring(1,3)}"></span>-->
+<!--密码是：<span th:text="${stu.pass}"></span>-->
+<!--您的年龄是： <span th:text="${stu['age']}"></span>-->
+<!--您喜欢的颜色是：<span th:utext="${stu.likeColor}"></span>-->
+
+<!--<div th:object="${stu}">-->
+<!--        <span th:text="*{code}"></span>-->
+<!--        <span th:text="*{code.split('')[2]}"></span>-->
+<!--        <span th:text="*{pass}"></span>-->
+<!--        <span th:text="*{age}"></span>-->
+<!--        <span th:utext="*{likeColor}"></span>-->
+<!--</div>-->
+
+<br/>
+
+<!--        <span th:text="'666'"></span>-->
+<!--        <span th:text="1024*2"></span>-->
+<!--        <span th:if="${stu.age}>=18">-->
+<!--            成年了-->
+<!--        </span>-->
+
+<!--        <span th:text="'你好'+${stu.code}+'嗯哼'"></span>-->
+<!--        <span th:text="|你好${stu.code}世界|"></span>-->
+
+<!--        &lt;!&ndash;算数运算&ndash;&gt;-->
+<!--        <span th:text="${stu.age}*2"></span>-->
+<!--<br/>-->
+<!--        <span th:text="${stu.age}>=18?'成年了':'未成年'">-->
+
+<!--        </span>-->
+
+<!--    =========list============-->
+<hr/>
+        <table border="1px">
+                 <tr>
+                     <th>下标</th>
+                     <th>编号</th>
+                     <th>密码</th>
+                     <th>年龄</th>
+                     <th>喜欢的颜色</th>
+                 </tr>
+                <tr th:each="stu, i : ${list}">
+                    <td th:text="${i.index}"></td>
+                    <td th:text="${stu.code}"></td>
+                    <td th:text="${stu.pass}"></td>
+                    <td th:text="${stu.age}"></td>
+                    <td th:utext="${stu.likeColor}"></td>
+                </tr>
+        </table>
+
+
+
+
+        <ul>
+            <li th:each="stu, start : ${list}">
+                 <span th:switch="${stu.code}">
+                       <span th:case="'008'">008号运动员</span>
+                       <span th:case="'001'">009号运动员</span>
+                       <span th:case="'010'">010号运动员</span>
+                        <span th:case="*">000000</span>
+                 </span>
+                <span th:text="${stu.code}"></span>-----
+                <span th:text="${stu.pass}"></span>-----
+                <span th:if="${stu.age>18}">成年了</span>-----
+                <span th:unless="${stu.age<18}">小屁孩</span>-----
+                <span th:utext="${stu.likeColor}"></span>
+            </li>
+        </ul>
+
+
+
+        <script th:inline="javascript">
+
+            const stuList = /*[[${list}]]*/;
+            const  stu=/*[[${list[0]}]]*/; 
+            const age = /*[[${list[0].age}]]*/;
+
+            console.log("集合："+stuList);
+            console.log("对象："+stu);
+            console.log("属性："+age);
+
+            stuList.forEach(stu=>{
+                console.log(stu.code+""+stu.pass);
+            })
+
+        </script>
+
+
+
+</body>
+</html>
